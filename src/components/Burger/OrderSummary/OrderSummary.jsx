@@ -19,11 +19,11 @@ const OrderSummary = (props) => {
       <div>
         <ul>{orderList}</ul>
       </div>
+      <span style={{ textDecoration: "underline" }}>
+        Total price: {props.totalPrice.toFixed(2)}
+      </span>{" "}
       <Button continueOrder={props.continueOrder} btnType={"Continue"} />
       <Button cancelOrder={props.cancelOrder} btnType={"Cansel"} />
-      <div>
-        {/* <button onClick={props.deactivateOrder}>cansel order</button> */}
-      </div>
     </HocAux>
   );
 };

@@ -1,0 +1,16 @@
+.LogoDesktop {
+    display: none;
+}
+
+@media (min-width: 500px) {
+    .LogoDesktop {
+        display: block;
+        background-color: transparent;
+        height: 80%;
+        margin-bottom: 0px;
+    }
+
+    .LogoDesktop img {
+        height: 90%;
+    }
+}

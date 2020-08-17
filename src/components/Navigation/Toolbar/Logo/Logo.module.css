@@ -1,0 +1,22 @@
+.Logo {
+    background-color: transparent;
+    height: 10%;
+    margin-bottom: 30px;
+
+}
+
+.Logo img {
+    height: 80%;
+}
+
+@media (min-width: 499) {
+    .Logo {
+        background-color: transparent;
+        height: 80%;
+        margin-bottom: 0px;
+    }
+
+    .Logo img {
+        height: 90%;
+    }
+}

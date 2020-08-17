@@ -1,0 +1,54 @@
+.SideDrawer {
+    position: fixed;
+    width: 300px;
+    max-width: 90%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    z-index: 200;
+    background-color: rgb(163, 156, 156);
+    padding: 35px 16px;
+    box-sizing: border-box;
+    transition: transform 1s ease-out;
+}
+
+.Open {
+    transform: translateX(0);
+}
+
+.Close {
+    transform: translateX(-100%);
+}
+
+.back {
+    width: 20px;
+    background-color: brown;
+    float: right;
+    height: 100%;
+}
+
+.hideSidebar {
+    background-color: transparent;
+    border: 1px solid grey;
+
+    margin-top: 20px;
+    border-radius: 10px;
+    color: rgb(100, 98, 98);
+    width: 70px;
+}
+
+.arrow {
+    font-size: 20px;
+}
+
+.hideSidebar:active,
+.hideSidebar:hover {
+    border: 1px solid rgb(0, 0, 0);
+    color: rgb(0, 0, 0);
+}
+
+@media (min-width: 500px) {
+    .SideDrawer {
+        display: none;
+    }
+}

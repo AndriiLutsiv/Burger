@@ -1,0 +1,18 @@
+.Tolbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 40px;
+    background-color: #E4CEFC;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 190;
+}
+
+@media (max-width: 499px) {
+    .DesktopOnly {
+        display: none;
+    }
+}

@@ -5,16 +5,16 @@ const Button = (props) => {
   if (props.btnType === "Continue") {
     b = (
       <button className={classes.continue} onClick={props.continueOrder}>
-        CONTINUE
+        CONTINUE{" "}
       </button>
     );
   } else if (props.btnType === "Cansel") {
     b = (
       <button className={classes.cancel} onClick={props.cancelOrder}>
-        CANSEL
+        CANCEL{" "}
       </button>
     );
   }
-  return <>{b}</>;
+  return <> {b} </>;
 };
 export default Button;

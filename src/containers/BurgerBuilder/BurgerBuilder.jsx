@@ -33,6 +33,7 @@ class BurgerBuilder extends Component {
   };
 
   makingPurchasable = (updatedIngredients) => {
+    // this allows make order button to be clickable
     // we expect updated ingredients Object
     let arrayWithValues = [];
     for (let key in updatedIngredients) {
@@ -86,6 +87,7 @@ class BurgerBuilder extends Component {
           cancelOrder={this.cancelOrder}
           ingredients={this.state.ingredients}
           continueOrder={this.continueOrder}
+          totalPrice={this.state.totalPrice}
         />
         <BuildControls
           addIngredient={this.addIngredient}

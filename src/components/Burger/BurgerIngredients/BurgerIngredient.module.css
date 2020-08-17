@@ -5,6 +5,7 @@
   border-radius: 0 0 30px 30px;
   box-shadow: inset -15px 0 #c15711;
   margin: 2% auto;
+  z-index: 100;
 }
 
 .BreadTop {
@@ -15,9 +16,10 @@
   box-shadow: inset -15px 0 #c15711;
   margin: 2% auto;
   position: relative;
+  z-index: 100;
 }
 
-.Seeds1 {
+/* .Seeds1 {
   width: 10%;
   height: 15%;
   position: absolute;
@@ -27,9 +29,9 @@
   border-radius: 40%;
   transform: rotate(-20deg);
   box-shadow: inset -2px -3px #c9c9c9;
-}
+} */
 
-.Seeds1:after {
+/* .Seeds1:after {
   content: "";
   width: 100%;
   height: 100%;
@@ -40,9 +42,9 @@
   border-radius: 40%;
   transform: rotate(60deg);
   box-shadow: inset -1px 2px #c9c9c9;
-}
+} */
 
-.Seeds1:before {
+/* .Seeds1:before {
   content: "";
   width: 100%;
   height: 100%;
@@ -65,8 +67,8 @@
   border-radius: 40%;
   transform: rotate(10deg);
   box-shadow: inset -3px 0 #c9c9c9;
-}
-
+} */
+/* 
 .Seeds2:before {
   content: "";
   width: 100%;
@@ -78,7 +80,7 @@
   border-radius: 40%;
   transform: rotate(90deg);
   box-shadow: inset 1px 3px #c9c9c9;
-}
+} */
 
 
 .Meat {
@@ -87,6 +89,7 @@
   background: linear-gradient(#7f3608, #702e05);
   margin: 2% auto;
   border-radius: 15px;
+  z-index: 100;
 }
 
 .Cheese {
@@ -95,6 +98,7 @@
   margin: 2% auto;
   background: linear-gradient(#f4d004, #d6bb22);
   border-radius: 20px;
+  z-index: 100;
 }
 
 .Salad {
@@ -103,6 +107,7 @@
   margin: 2% auto;
   background: linear-gradient(#228c1d, #91ce50);
   border-radius: 20px;
+  z-index: 100;
 }
 
 .Bacon {
@@ -110,4 +115,5 @@
   height: 3%;
   background: linear-gradient(#bf3813, #c45e38);
   margin: 2% auto;
+  z-index: 100;
 }

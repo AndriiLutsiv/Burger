@@ -9,6 +9,7 @@ const Modal = (props) => {
           ingredients={props.ingredients}
           cancelOrder={props.cancelOrder}
           continueOrder={props.continueOrder}
+          totalPrice={props.totalPrice}
         />
       ) : null}
     </div>
