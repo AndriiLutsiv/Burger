@@ -2,17 +2,29 @@ import React from "react";
 import BuildControl from "./BuildControl/BuildControl";
 import classes from "../BuildControls/BuildControls.module.css";
 const options = [
-  { name: "Salad", type: "salad" },
-  { name: "Meat", type: "meat" },
-  { name: "Cheese", type: "cheese" },
-  { name: "Bacon", type: "bacon" },
+  {
+    name: "Salad",
+    type: "salad",
+  },
+  {
+    name: "Meat",
+    type: "meat",
+  },
+  {
+    name: "Cheese",
+    type: "cheese",
+  },
+  {
+    name: "Bacon",
+    type: "bacon",
+  },
 ];
 const BuildControls = (props) => {
   return (
     <div className={classes.BuildControls}>
       <div className={classes.TotalPrice}>
-        You will pay {props.totalPrice.toFixed(2)}$
-      </div>
+        You will pay {props.totalPrice.toFixed(2)}${" "}
+      </div>{" "}
       {options.map((el) => {
         return (
           <BuildControl
@@ -29,6 +41,15 @@ const BuildControls = (props) => {
           />
         );
       })}
+      <div>
+        <button
+          onClick={props.activareOrder}
+          className={classes.orderButton}
+          disabled={props.purchasable}
+        >
+          Make order
+        </button>
+      </div>
     </div>
   );
 };

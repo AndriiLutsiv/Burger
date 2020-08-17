@@ -16,3 +16,26 @@
     border-radius: 7px;
     margin-bottom: 10px;
 }
+
+.orderButton {
+    margin-top: 10px;
+    padding: 5px 15px;
+    font-size: 25px;
+    border-radius: 7px;
+    color: white;
+    border: 1px solid white;
+    background-color: rgba(64, 175, 64, 0.692);
+}
+
+.orderButton:hover,
+.orderButton:active {
+    background-color: rgba(64, 175, 64, 0.411);
+    border: 1px solid rgb(16, 172, 184);
+    cursor: pointer;
+}
+
+.orderButton:disabled {
+    background-color: rgba(64, 175, 64, 0.123);
+    cursor: not-allowed;
+    border: 1px solid white;
+}

@@ -1,0 +1,25 @@
+.continue {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+  font-weight: 700;
+  color: green;
+  position: absolute;
+  bottom: 10px;
+  left: 50px;
+
+}
+
+.cancel {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+  display: inline;
+  font-weight: 700;
+  color: red;
+  position: absolute;
+  bottom: 10px;
+  right: 50px;
+}
