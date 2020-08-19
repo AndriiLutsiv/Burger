@@ -122,6 +122,7 @@ class BurgerBuilder extends Component {
         ) : (
           <div>
             <Burger ingredients={this.state.ingredients} />
+
             {this.state.loading ? (
               <Loader />
             ) : (
