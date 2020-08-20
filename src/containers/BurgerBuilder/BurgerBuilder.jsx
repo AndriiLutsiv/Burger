@@ -32,6 +32,8 @@ class BurgerBuilder extends Component {
     //activates loading depending on incoming parameter
     this.setState({ loading: boolean });
   };
+
+  // by clicking it will send request to server with our ingredients and price and additional info and bring us to /checkout URL
   continueOrder = () => {
     this.setLoading(true);
     alert("continue");
@@ -41,7 +43,7 @@ class BurgerBuilder extends Component {
       customer: {
         //some random data
         name: "Andrii",
-        weight: "88",
+        email: "example@gmail.com",
         adress: {
           country: "Ukraine",
           city: "Poltava",
@@ -58,7 +60,21 @@ class BurgerBuilder extends Component {
         this.setLoading(false);
         console.log(error);
       });
+    let arrayWithParams = [];
+    for (let key in this.state.ingredients) {
+      arrayWithParams.push(
+        encodeURIComponent(key) +
+          "=" +
+          encodeURIComponent(this.state.ingredients[key])
+      );
+    }
+    const queryString = arrayWithParams.join("&");
+    this.props.history.push({
+      pathname: "/checkout",
+      search: "?" + queryString,
+    });
   };
+
   componentDidMount = () => {
     Axios.get("https://burgerbase-43af3.firebaseio.com/Ingredients.json").then(
       (Response) => {

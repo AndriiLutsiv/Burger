@@ -5,8 +5,44 @@
   position: relative;
 }
 
-@media (min-width: 600px) {
-  .CheckoutSummary {
-    width: 500px;
+.continue {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+  font-weight: 700;
+  color: green;
+  position: absolute;
+  bottom: 0px;
+  left: 30px;
+
+}
+
+.cancel {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  display: block;
+  display: inline;
+  font-weight: 700;
+  color: red;
+  position: absolute;
+  bottom: 0px;
+  right: 30px;
+}
+
+.btnLocation {
+  position: relative;
+  margin: 0 auto;
+  min-width: 320px;
+  height: 30px;
+}
+
+@media (min-width: 500px) {
+  .btnLocation {
+    position: relative;
+    margin: 0 auto;
+    width: 450px;
+    height: 30px;
   }
 }

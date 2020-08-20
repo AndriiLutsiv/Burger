@@ -1,25 +1,29 @@
 import React from "react";
 import classes from "./CheckoutSummary.module.css";
 import Burger from "../../../../components/Burger/Burger";
-import Button from "../../../../components/common/Button";
 
 class CheckoutSummary extends React.Component {
   render() {
     return (
-      <div className={classes.CheckoutSummary}>
+      <div>
         <h1>Enjoy your meal!</h1>
-        <div
-          style={{
-            width: "300px",
-            height: "300px",
-            margin: "auto",
-            position: "relative",
-          }}
-        >
+        <div>
           <Burger ingredients={this.props.ingredients} />
         </div>
-        <Button btnType={"Continue"} />
-        <Button btnType={"Cansel"} />
+        <div className={classes.btnLocation}>
+          <button
+            onClick={this.props.continueCheckout}
+            className={classes.continue}
+          >
+            CONTINUE
+          </button>
+          <button
+            onClick={this.props.cancelCheckout}
+            className={classes.cancel}
+          >
+            CANCEL
+          </button>
+        </div>
       </div>
     );
   }
