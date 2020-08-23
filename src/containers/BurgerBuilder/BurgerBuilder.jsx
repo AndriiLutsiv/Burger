@@ -3,7 +3,7 @@ import HocAux from "../../hoc/HocAux";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
-import instance from "../../axiosOrders";
+
 import Loader from "../../components/common/Loader";
 import Axios from "axios";
 
@@ -28,39 +28,11 @@ class BurgerBuilder extends Component {
   cancelOrder = () => {
     this.setState({ orderActive: false }); //if orderActive is true the yellow order summary will appear
   };
-  setLoading = (boolean) => {
-    //activates loading depending on incoming parameter
-    this.setState({ loading: boolean });
-  };
 
   // by clicking it will send request to server with our ingredients and price and additional info and bring us to /checkout URL
   continueOrder = () => {
-    this.setLoading(true);
-    alert("continue");
-    let order = {
-      ingredients: this.state.ingredients,
-      totalPrice: this.state.totalPrice,
-      customer: {
-        //some random data
-        name: "Andrii",
-        email: "example@gmail.com",
-        adress: {
-          country: "Ukraine",
-          city: "Poltava",
-        },
-      },
-    };
-    instance //here goes axios post requst
-      .post("/orders.json", order)
-      .then((Response) => {
-        this.setLoading(false); //once the responce is recieved we turn off loading
-        console.log(Response);
-      })
-      .catch((error) => {
-        this.setLoading(false);
-        console.log(error);
-      });
     let arrayWithParams = [];
+    arrayWithParams.push("totalPrice=" + this.state.totalPrice);
     for (let key in this.state.ingredients) {
       arrayWithParams.push(
         encodeURIComponent(key) +
@@ -78,8 +50,6 @@ class BurgerBuilder extends Component {
   componentDidMount = () => {
     Axios.get("https://burgerbase-43af3.firebaseio.com/Ingredients.json").then(
       (Response) => {
-        console.log(Response.data);
-
         this.setState({ ingredients: Response.data });
       }
     );

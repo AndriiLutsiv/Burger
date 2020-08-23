@@ -11,7 +11,6 @@ const Burger = (props) => {
   if (stuff.length === 0) {
     stuff = <p> Please add the ingredients </p>;
   }
-  console.log(stuff);
 
   return (
     <div className={classes.Burger}>

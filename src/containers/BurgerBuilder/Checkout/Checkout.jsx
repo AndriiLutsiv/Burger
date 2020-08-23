@@ -5,21 +5,22 @@ import ContactData from "./ContactData/ContactData";
 
 class Checkout extends React.Component {
   state = {
-    ingredients: {
-      salad: 1,
-      meat: 1,
-      cheese: 1,
-      bacon: 1,
-    },
+    ingredients: null,
+    totalPrice: 0,
   };
-  componentDidMount() {
+  componentWillMount() {
     const query = new URLSearchParams(this.props.location.search);
     const ingredients = {};
+    let totalPrice = 0;
     for (let item of query) {
-      //[item is ['salad', '1'], ['bacon', '0'] .... ]
-      ingredients[item[0]] = +item[1];
+      if (item.includes("totalPrice")) {
+        totalPrice = +item[1];
+      } else {
+        //[item is ['salad', '1'], ['bacon', '0'] .... ]
+        ingredients[item[0]] = +item[1];
+      }
     }
-    this.setState({ ingredients: ingredients });
+    this.setState({ ingredients: ingredients, totalPrice: totalPrice });
   }
   continueCheckout = () => {
     this.props.history.replace("/checkout/contact-data"); //we recieve special params. In history there is replace. it replaces current url to following
@@ -28,7 +29,6 @@ class Checkout extends React.Component {
     this.props.history.goBack();
   };
   render() {
-    console.log(this.props);
     return (
       <div>
         <CheckoutSummary
@@ -38,7 +38,12 @@ class Checkout extends React.Component {
         />
         <Route
           path={this.props.match.url + "/contact-data"}
-          component={ContactData}
+          render={() => (
+            <ContactData
+              ingredients={this.state.ingredients}
+              totalPrice={this.state.totalPrice}
+            />
+          )}
         />
       </div>
     );
