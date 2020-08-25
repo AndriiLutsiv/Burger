@@ -1,6 +1,8 @@
 import React from "react";
 import BuildControl from "./BuildControl/BuildControl";
 import classes from "../BuildControls/BuildControls.module.css";
+import { connect } from "react-redux";
+import * as actionCreators from "../../../reduxStore/burgerPage/burger-actionCreators";
 const options = [
   {
     name: "Salad",
@@ -20,10 +22,11 @@ const options = [
   },
 ];
 const BuildControls = (props) => {
+  // debugger;
   return (
     <div className={classes.BuildControls}>
       <div className={classes.TotalPrice}>
-        You will pay {props.totalPrice.toFixed(2)}${" "}
+        You will pay {props.totalPrice.toFixed(2)}
       </div>{" "}
       {options.map((el) => {
         return (
@@ -43,7 +46,7 @@ const BuildControls = (props) => {
       })}
       <div>
         <button
-          onClick={props.activareOrder}
+          onClick={props.activateOrder}
           className={classes.orderButton}
           disabled={props.purchasable}
         >
@@ -53,4 +56,14 @@ const BuildControls = (props) => {
     </div>
   );
 };
-export default BuildControls;
+const mapStateToProps = () => {
+  return {};
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    activateOrder: () => {
+      dispatch(actionCreators.activateOrderAC());
+    },
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BuildControls);

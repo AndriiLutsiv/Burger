@@ -1,10 +1,11 @@
 import React from "react";
-
+import * as actionCreators from "../../../../reduxStore/burgerPage/burger-actionCreators";
 import classes from "./ContactData.module.css";
 // import instance from "../../../../axiosOrders";
 import Loader from "../../../../components/common/Loader";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
+import { connect } from "react-redux";
 class ContactData extends React.Component {
   state = {
     name: "",
@@ -13,15 +14,10 @@ class ContactData extends React.Component {
       country: "",
       city: "",
     },
-    loading: false,
-  };
-  setLoading = (boolean) => {
-    //activates loading depending on incoming parameter
-    this.setState({ loading: boolean });
   };
   order = () => {
     alert("order");
-    this.setLoading(true);
+    this.props.loadingProcess(true);
     let order = {
       ingredients: this.props.ingredients,
       totalPrice: this.props.totalPrice,
@@ -38,22 +34,18 @@ class ContactData extends React.Component {
 
     //here goes axios post requst
 
-    Axios.put("https://burgerbase-43af3.firebaseio.com/orders.json", order)
-      .then((Response) => {
-        this.setLoading(false); //once the responce is recieved we turn off loading
-        console.log(Response);
-        this.props.history.push("/");
-      })
-      .catch((error) => {
-        // console.log(error);
-        this.setLoading(false);
-      });
+    Axios.put(
+      "https://burgerbase-43af3.firebaseio.com/orders.json",
+      order
+    ).then((Response) => {
+      this.props.loadingProcess(false); //once the responce is recieved we turn off loading
+      this.props.history.push("/");
+    });
   };
   render() {
-    console.log(this.props);
     return (
       <div className={classes.ContactData}>
-        {this.state.loading ? (
+        {this.props.loading ? (
           <Loader />
         ) : (
           <div action="">
@@ -69,5 +61,19 @@ class ContactData extends React.Component {
     );
   }
 }
-
-export default withRouter(ContactData);
+const mapStateToProps = (state) => {
+  return {
+    loading: state.loading,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    loadingProcess: (boolean) => {
+      dispatch(actionCreators.loadingProcessAC(boolean));
+    },
+  };
+};
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(withRouter(ContactData));

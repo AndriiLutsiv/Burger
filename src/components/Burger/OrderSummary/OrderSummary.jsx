@@ -1,5 +1,4 @@
 import React from "react";
-import HocAux from "../../../hoc/HocAux";
 import Button from "../../common/Button";
 const OrderSummary = (props) => {
   const orderList = Object.keys(props.ingredients).map((el, index) => {
@@ -13,7 +12,7 @@ const OrderSummary = (props) => {
   });
 
   return (
-    <HocAux>
+    <>
       <h2>Your order</h2>
       <div>Burger with the following ingredients:</div>
       <div>
@@ -21,10 +20,10 @@ const OrderSummary = (props) => {
       </div>
       <span style={{ textDecoration: "underline" }}>
         Total price: {props.totalPrice.toFixed(2)}
-      </span>{" "}
+      </span>
       <Button continueOrder={props.continueOrder} btnType={"Continue"} />
       <Button cancelOrder={props.cancelOrder} btnType={"Cansel"} />
-    </HocAux>
+    </>
   );
 };
 export default OrderSummary;

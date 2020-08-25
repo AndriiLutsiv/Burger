@@ -1,62 +1,22 @@
 import React, { Component } from "react";
-import HocAux from "../../hoc/HocAux";
 import Burger from "../../components/Burger/Burger";
 import BuildControls from "../../components/Burger/BuildControls/BuildControls";
 import Modal from "../../components/UI/Modal/Modal";
-
 import Loader from "../../components/common/Loader";
-import Axios from "axios";
-
-const prices = {
-  salad: 1.2,
-  cheese: 2.1,
-  bacon: 2.15,
-  meat: 3.5,
-};
+import { connect } from "react-redux";
+import * as actionCreators from "../../reduxStore/burgerPage/burger-actionCreators";
 
 class BurgerBuilder extends Component {
-  state = {
-    ingredients: null,
-    totalPrice: 0,
-    purchasable: true,
-    orderActive: false,
-    loading: false,
-  };
-  activareOrder = () => {
-    this.setState({ orderActive: true }); //if orderActive is true the yellow order summary will appear
-  };
-  cancelOrder = () => {
-    this.setState({ orderActive: false }); //if orderActive is true the yellow order summary will appear
-  };
-
+  componentDidMount() {
+    this.props.setIngredientsThunkCreator();
+  }
   // by clicking it will send request to server with our ingredients and price and additional info and bring us to /checkout URL
   continueOrder = () => {
-    let arrayWithParams = [];
-    arrayWithParams.push("totalPrice=" + this.state.totalPrice);
-    for (let key in this.state.ingredients) {
-      arrayWithParams.push(
-        encodeURIComponent(key) +
-          "=" +
-          encodeURIComponent(this.state.ingredients[key])
-      );
-    }
-    const queryString = arrayWithParams.join("&");
-    this.props.history.push({
-      pathname: "/checkout",
-      search: "?" + queryString,
-    });
+    this.props.history.push("/checkout");
   };
 
-  componentDidMount = () => {
-    Axios.get("https://burgerbase-43af3.firebaseio.com/Ingredients.json").then(
-      (Response) => {
-        this.setState({ ingredients: Response.data });
-      }
-    );
-  };
   makingPurchasable = (updatedIngredients) => {
-    // this allows make order button to be clickable
-    // we expect updated ingredients Object
+    // this allows make order button to be clickable. we expect updated ingredients Object
     let arrayWithValues = [];
     for (let key in updatedIngredients) {
       arrayWithValues.push(updatedIngredients[key]);
@@ -65,76 +25,71 @@ class BurgerBuilder extends Component {
     arrayWithValues.forEach((element) => {
       count += element;
     });
-    this.setState({ purchasable: count <= 0 ? true : false });
+    return count <= 0 ? true : false;
   };
-  addIngredient = (type) => {
-    //working on quantity
-    const updatedQuantity = this.state.ingredients[type] + 1; //certain ingredient`s quantity will be increased
-    const updatedIngredients = {
-      ...this.state.ingredients,
-    }; //we work with the cope of ingredients
-    updatedIngredients[type] = updatedQuantity; // certain ingr`s quantity in object now equals to updated Quantity
-    //working on totalPrice
-    const updatedTotalPrice = this.state.totalPrice + prices[type]; //the totalPrice for engredients is now the current one + certain ingr. price from price obj
-    this.setState({
-      ingredients: updatedIngredients,
-      totalPrice: updatedTotalPrice,
-    });
-    this.makingPurchasable(updatedIngredients); //we call after every click of adding ingredient
+  addIngredient = (ingredientType) => {
+    //adds ingredient
+    this.props.onAddIngredient(ingredientType);
+    this.props.onAddPrice(ingredientType);
   };
 
-  removeIngredient = (type) => {
-    //working on quantity
-    const updatedQuantity = this.state.ingredients[type] - 1; //certain ingredient`s quantity will be decreased
-    const updatedIngredients = {
-      ...this.state.ingredients,
-    }; //we work with the cope of ingredients
-    updatedIngredients[type] = updatedQuantity; // certain ingr`s quantity in object now equals to updated Quantity
-    //working on totalPrice
-    const updatedTotalPrice = this.state.totalPrice - prices[type]; //the totalPrice for engredients is now the current one - certain ingr. price from price obj
-
-    this.setState({
-      ingredients: updatedIngredients,
-      totalPrice: updatedTotalPrice,
-    });
-    this.makingPurchasable(updatedIngredients); //we call after every click of removing ingredient
+  removeIngredient = (ingredientType) => {
+    //removes ingredient
+    this.props.onRemoveIngredients(ingredientType);
+    this.props.onSubtractPrice(ingredientType);
   };
 
   render() {
     return (
-      <HocAux>
-        {this.state.ingredients === null ? (
+      <>
+        {this.props.loading ? (
           <Loader />
         ) : (
           <div>
-            <Burger ingredients={this.state.ingredients} />
-
-            {this.state.loading ? (
+            <Burger ingredients={this.props.ingredients} />
+            {this.props.loading ? (
               <Loader />
             ) : (
               <Modal
-                orderActive={this.state.orderActive}
-                cancelOrder={this.cancelOrder}
-                ingredients={this.state.ingredients}
+                ingredients={this.props.ingredients}
                 continueOrder={this.continueOrder}
-                totalPrice={this.state.totalPrice}
+                totalPrice={this.props.totalPrice}
               />
             )}
 
             <BuildControls
               addIngredient={this.addIngredient}
               removeIngredient={this.removeIngredient}
-              buttonStatus={this.state.buttonStatus}
-              ingredientsIfZero={this.state.ingredients} //passing the ingredients for ternar
-              ingredientsIfThree={this.state.ingredients} // passing the ingredients for ternar
-              totalPrice={this.state.totalPrice}
-              purchasable={this.state.purchasable}
-              activareOrder={this.activareOrder}
+              ingredientsIfZero={this.props.ingredients} //passing the ingredients for ternar
+              ingredientsIfThree={this.props.ingredients} // passing the ingredients for ternar
+              totalPrice={this.props.totalPrice}
+              purchasable={this.makingPurchasable(this.props.ingredients)}
             />
           </div>
         )}
-      </HocAux>
+      </>
     );
   }
 }
-export default BurgerBuilder;
+const mapStateToProps = (state) => {
+  return {
+    ingredients: state.ingredients,
+    totalPrice: state.totalPrice,
+    loading: state.loading,
+  };
+};
+const mapDispatchToProps = (dispatch) => {
+  return {
+    onAddIngredient: (ingredientType) =>
+      dispatch(actionCreators.addIngredientAC(ingredientType)),
+    onRemoveIngredients: (ingredientType) =>
+      dispatch(actionCreators.removeIngredientAC(ingredientType)),
+    onAddPrice: (ingredientType) =>
+      dispatch(actionCreators.addPriceAC(ingredientType)),
+    onSubtractPrice: (ingredientType) =>
+      dispatch(actionCreators.subtractPriceAC(ingredientType)),
+    setIngredientsThunkCreator: () =>
+      dispatch(actionCreators.setIngredientsThunkCreator()),
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(BurgerBuilder);
