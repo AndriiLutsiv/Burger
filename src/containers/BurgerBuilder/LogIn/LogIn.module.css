@@ -1,0 +1,38 @@
+.LogIn {
+    margin-top: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 20px;
+    border: 2px solid black;
+    min-width: 280px;
+    max-width: 600px;
+    border-radius: 7px;
+}
+
+.LogIn input {
+    margin: 10px;
+}
+
+.LogIn button {
+    margin: 10px;
+    border: 2px solid grey;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-weight: 700;
+}
+
+@media (max-width: 670px) {
+    .LogIn {
+        margin-left: 20px;
+        margin-right: 20px;
+    }
+}
+
+@media (max-width: 400px) {
+    .LogIn {
+        margin-left: 5px;
+        margin-right: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
