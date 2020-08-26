@@ -9,7 +9,6 @@ class Orders extends React.Component {
   };
   componentDidMount() {
     instance.get("orders.json").then((Response) => {
-      console.log(Response.data);
       let retrievedIngredients = [];
       let retrievedQuantity = [];
 
@@ -22,8 +21,6 @@ class Orders extends React.Component {
         quantity: retrievedQuantity,
         price: Response.data.totalPrice,
       });
-
-      console.log("state is:", this.state);
     });
   }
   render() {

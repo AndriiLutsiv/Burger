@@ -6,6 +6,7 @@ import Loader from "../../../../components/common/Loader";
 import Axios from "axios";
 import { withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import ReduxFormContactData from "./ReduxFormContactData/ReduxFormContactData";
 class ContactData extends React.Component {
   state = {
     name: "",
@@ -15,31 +16,31 @@ class ContactData extends React.Component {
       city: "",
     },
   };
-  order = () => {
-    alert("order");
-    this.props.loadingProcess(true);
+  order = (values) => {
     let order = {
       ingredients: this.props.ingredients,
       totalPrice: this.props.totalPrice,
       customer: {
         //some random data
-        name: "Andrii",
-        email: "example@gmail.com",
+        name: values.name,
+        email: values.email,
         adress: {
-          country: "Ukraine",
-          city: "Poltava",
+          country: values.country,
+          city: values.city,
         },
       },
     };
 
     //here goes axios post requst
-
+    this.props.loadingProcess(true);
     Axios.put(
       "https://burgerbase-43af3.firebaseio.com/orders.json",
       order
     ).then((Response) => {
       this.props.loadingProcess(false); //once the responce is recieved we turn off loading
+
       this.props.history.push("/");
+      this.props.hideOrderSummary(); // when we are redirected to '/' the yellow orderSummary will be hidden
     });
   };
   render() {
@@ -48,13 +49,7 @@ class ContactData extends React.Component {
         {this.props.loading ? (
           <Loader />
         ) : (
-          <div action="">
-            <input className={classes.Input} type="text" name="name" />
-            <input className={classes.Input} type="text" name="email" />
-            <input className={classes.Input} type="text" name="country" />
-            <input className={classes.Input} type="text" name="city" />
-            <button onClick={this.order}>ORDER</button>
-          </div>
+          <ReduxFormContactData onSubmit={this.order} />
         )}
         <h3>Enter your Contact Data</h3>
       </div>
@@ -63,13 +58,17 @@ class ContactData extends React.Component {
 }
 const mapStateToProps = (state) => {
   return {
-    loading: state.loading,
+    loading: state.burgerReducer.loading,
+    ingredients: state.burgerReducer.ingredients,
   };
 };
 const mapDispatchToProps = (dispatch) => {
   return {
     loadingProcess: (boolean) => {
       dispatch(actionCreators.loadingProcessAC(boolean));
+    },
+    hideOrderSummary: () => {
+      dispatch(actionCreators.cancelOrderAC());
     },
   };
 };

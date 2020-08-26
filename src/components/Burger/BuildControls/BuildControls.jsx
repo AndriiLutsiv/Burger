@@ -4,30 +4,17 @@ import classes from "../BuildControls/BuildControls.module.css";
 import { connect } from "react-redux";
 import * as actionCreators from "../../../reduxStore/burgerPage/burger-actionCreators";
 const options = [
-  {
-    name: "Salad",
-    type: "salad",
-  },
-  {
-    name: "Meat",
-    type: "meat",
-  },
-  {
-    name: "Cheese",
-    type: "cheese",
-  },
-  {
-    name: "Bacon",
-    type: "bacon",
-  },
+  { name: "Salad", type: "salad" },
+  { name: "Meat", type: "meat" },
+  { name: "Cheese", type: "cheese" },
+  { name: "Bacon", type: "bacon" },
 ];
 const BuildControls = (props) => {
-  // debugger;
   return (
     <div className={classes.BuildControls}>
       <div className={classes.TotalPrice}>
-        You will pay {props.totalPrice.toFixed(2)}
-      </div>{" "}
+        To be paid {props.totalPrice.toFixed(2)}$
+      </div>
       {options.map((el) => {
         return (
           <BuildControl
@@ -36,6 +23,7 @@ const BuildControls = (props) => {
             addIngredient={() => props.addIngredient(el.type)}
             removeIngredient={() => props.removeIngredient(el.type)}
             ingredientsIfZero={
+              //we recieve ingredients in props, if > 3 or 0 button is disabled
               props.ingredientsIfZero[el.type] === 0 ? true : false
             }
             ingredientsIfThree={

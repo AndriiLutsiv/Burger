@@ -1,0 +1,18 @@
+.normal {
+    border: 2px solid grey;
+    width: 250px;
+    height: 20px;
+    border-radius: 5px;
+}
+
+.error {
+    border: 2px solid rgb(245, 140, 140);
+    width: 250px;
+    height: 20px;
+    border-radius: 5px;
+    background-color: rgba(243, 177, 177, 0.76);
+}
+
+.redSpan {
+    color: rgb(240, 85, 85);
+}

@@ -18,7 +18,7 @@ const Modal = (props) => {
   );
 };
 const mapStateToProps = (state) => {
-  return { orderActive: state.orderActive };
+  return { orderActive: state.burgerReducer.orderActive };
 };
 const mapDispatchToProps = (dispatch) => {
   return {

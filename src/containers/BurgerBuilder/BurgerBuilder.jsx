@@ -10,8 +10,9 @@ class BurgerBuilder extends Component {
   componentDidMount() {
     this.props.setIngredientsThunkCreator();
   }
-  // by clicking it will send request to server with our ingredients and price and additional info and bring us to /checkout URL
+
   continueOrder = () => {
+    // by clicking it will redirect us to checkout
     this.props.history.push("/checkout");
   };
 
@@ -25,16 +26,17 @@ class BurgerBuilder extends Component {
     arrayWithValues.forEach((element) => {
       count += element;
     });
+
     return count <= 0 ? true : false;
   };
   addIngredient = (ingredientType) => {
-    //adds ingredient
+    //adds ingredient, adds price
     this.props.onAddIngredient(ingredientType);
     this.props.onAddPrice(ingredientType);
   };
 
   removeIngredient = (ingredientType) => {
-    //removes ingredient
+    //removes ingredient, subtracts price
     this.props.onRemoveIngredients(ingredientType);
     this.props.onSubtractPrice(ingredientType);
   };
@@ -56,7 +58,6 @@ class BurgerBuilder extends Component {
                 totalPrice={this.props.totalPrice}
               />
             )}
-
             <BuildControls
               addIngredient={this.addIngredient}
               removeIngredient={this.removeIngredient}
@@ -73,9 +74,9 @@ class BurgerBuilder extends Component {
 }
 const mapStateToProps = (state) => {
   return {
-    ingredients: state.ingredients,
-    totalPrice: state.totalPrice,
-    loading: state.loading,
+    ingredients: state.burgerReducer.ingredients,
+    totalPrice: state.burgerReducer.totalPrice,
+    loading: state.burgerReducer.loading,
   };
 };
 const mapDispatchToProps = (dispatch) => {

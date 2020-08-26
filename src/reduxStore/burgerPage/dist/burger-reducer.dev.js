@@ -9,12 +9,6 @@ exports["default"] = void 0;
 
 var actionTypes = _interopRequireWildcard(require("./burger-actionTypes"));
 
-var _redux = require("redux");
-
-var _reduxThunk = _interopRequireDefault(require("redux-thunk"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { "default": obj }; }
-
 function _getRequireWildcardCache() { if (typeof WeakMap !== "function") return null; var cache = new WeakMap(); _getRequireWildcardCache = function _getRequireWildcardCache() { return cache; }; return cache; }
 
 function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } if (obj === null || _typeof(obj) !== "object" && typeof obj !== "function") { return { "default": obj }; } var cache = _getRequireWildcardCache(); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj["default"] = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
@@ -66,7 +60,9 @@ var burgerReducer = function burgerReducer() {
 
     case actionTypes.SET_INGREDIENTS:
       return _objectSpread({}, state, {
-        ingredients: action.ingredients
+        ingredients: action.ingredients,
+        totalPrice: 0 //after order we are redirected to '/', but if we don`t hardcode totalPrice to be 0, price will remain after last order. (now price will be updated as there is didMount in '/')
+
       });
 
     case actionTypes.LOAD_PROCESS:
@@ -89,7 +85,5 @@ var burgerReducer = function burgerReducer() {
   }
 };
 
-var store = (0, _redux.createStore)(burgerReducer, (0, _redux.applyMiddleware)(_reduxThunk["default"]));
-window.store = store;
-var _default = store;
+var _default = burgerReducer;
 exports["default"] = _default;

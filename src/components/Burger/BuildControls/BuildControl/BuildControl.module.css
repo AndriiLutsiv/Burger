@@ -9,7 +9,7 @@
     display: block;
     font: inherit;
     padding: 3px;
-    margin: 0 10px;
+    margin: 0 12px;
     width: 100px;
     border: 1px solid #A34AFC;
     border-radius: 7px;
@@ -17,18 +17,13 @@
 }
 
 .BuildControl button:disabled {
-    background-color: #AC9980;
-    border: 1px solid #7E7365;
-    color: rgba(204, 204, 204, 0.719);
+    background-color: rgba(64, 175, 64, 0.123);
+    cursor: not-allowed;
+    border: 1px solid rgb(170, 170, 170);
+    color: rgb(231, 228, 228);
     cursor: not-allowed;
 }
 
-
-/* .Label {
-    padding: 10px;
-    font-weight: bold;
-    width: 80px;
-} */
 
 .Remove {
     background-color: #4b1072b0;

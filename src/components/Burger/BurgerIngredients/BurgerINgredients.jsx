@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./BurgerIngredient.module.css";
-import PropTypes from "prop-types";
+// import PropTypes from "prop-types";
 const BurgerIngredient = (props) => {
   let ingredient = null;
   if (props.type === "bread-bottom") {
@@ -22,14 +22,14 @@ const BurgerIngredient = (props) => {
   } else ingredient = null;
   return ingredient;
 };
-BurgerIngredient.propTypes = {
-  type: PropTypes.string.isRequired,
-  //   "bread-bottom": PropTypes.string,
-  //   meat: PropTypes.string,
-  //   cheese: PropTypes.string,
-  //   bacon: PropTypes.string,
-  //   seeds1: PropTypes.string,
-  //   seeds2: PropTypes.string,
-  //   salad: PropTypes.string,
-};
+// BurgerIngredient.propTypes = {
+//   type: PropTypes.string.isRequired,
+//   //   "bread-bottom": PropTypes.string,
+//   //   meat: PropTypes.string,
+//   //   cheese: PropTypes.string,
+//   //   bacon: PropTypes.string,
+//   //   seeds1: PropTypes.string,
+//   //   seeds2: PropTypes.string,
+//   //   salad: PropTypes.string,
+// };
 export default BurgerIngredient;

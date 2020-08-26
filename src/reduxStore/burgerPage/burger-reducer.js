@@ -1,9 +1,5 @@
 import * as actionTypes from './burger-actionTypes';
-import {
-    createStore,
-    applyMiddleware
-} from 'redux';
-import thunkMiddleware from 'redux-thunk';
+
 
 const prices = {
     salad: 1.2,
@@ -49,7 +45,8 @@ const burgerReducer = (state = initialState, action) => {
         case actionTypes.SET_INGREDIENTS:
             return {
                 ...state,
-                ingredients: action.ingredients
+                ingredients: action.ingredients,
+                    totalPrice: 0 //after order we are redirected to '/', but if we don`t hardcode totalPrice to be 0, price will remain after last order. (now price will be updated as there is didMount in '/')
             };
         case actionTypes.LOAD_PROCESS:
             return {
@@ -71,7 +68,4 @@ const burgerReducer = (state = initialState, action) => {
             return state;
     }
 };
-
-let store = createStore(burgerReducer, applyMiddleware(thunkMiddleware));
-window.store = store;
-export default store;
+export default burgerReducer;

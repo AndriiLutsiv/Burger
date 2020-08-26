@@ -4,7 +4,7 @@ import NavItems from "../NavItems/NavItems";
 import classes from "./SideDrawer.module.css";
 const SideDrawer = (props) => {
   let addClasses = [classes.SideDrawer];
-  if (props.showSidebar === true) {
+  if (props.showSidebar) {
     addClasses = [classes.SideDrawer, classes.Open];
   }
 

@@ -1,8 +1,8 @@
 .NavItems {
     align-items: center;
     height: 100%;
-    list-style: none;
-    box-sizing: border-box;
+    /* list-style: none;
+    box-sizing: border-box; */
 }
 
 @media(min-width: 500px) {
@@ -11,7 +11,7 @@
         flex-direction: row;
         align-items: center;
         height: 100%;
-        list-style: none;
-        box-sizing: border-box;
+        /* list-style: none;
+        box-sizing: border-box; */
     }
 }

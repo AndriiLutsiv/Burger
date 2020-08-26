@@ -2,13 +2,14 @@
     width: 50%;
     border: 1px solid grey;
     box-shadow: 2px 2px rgb(155, 154, 154);
-    padding: 10px;
+    padding: 20px;
     margin: 10px auto;
+    border-radius: 5px;
     background-image: linear-gradient(to top, rgb(248, 247, 247), rgb(197, 194, 194));
 
 }
 
 .Row {
     padding: 10px;
-
+    font-size: 20px;
 }
