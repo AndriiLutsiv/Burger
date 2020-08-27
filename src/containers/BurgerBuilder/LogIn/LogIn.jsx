@@ -7,8 +7,9 @@ import {
   minLengthCreator,
 } from "../../../components/common/validators";
 import classes from "./LogIn.module.css";
-const maxLength = maxLengthCreator(20);
+const maxLength = maxLengthCreator(30);
 const minLength = minLengthCreator(3);
+
 const LogIn = (props) => {
   return (
     <div className={classes.LogIn}>
@@ -33,6 +34,9 @@ const LogIn = (props) => {
         </div>
         <button>LogIn</button>
       </form>
+      <button onClick={props.switchSignUp}>
+        switch to sign{props.isSignUp ? "IN" : "UP"}
+      </button>
     </div>
   );
 };
