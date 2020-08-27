@@ -13,6 +13,7 @@ const minLength = minLengthCreator(3);
 const LogIn = (props) => {
   return (
     <div className={classes.LogIn}>
+      {props.errorResponse ? <p>{props.errorMessage}</p> : null}
       <form onSubmit={props.handleSubmit}>
         <div>
           <Field
