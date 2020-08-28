@@ -1,6 +1,5 @@
 import * as actionTypes from './burger-actionTypes';
 
-
 const prices = {
     salad: 1.2,
     cheese: 2.1,
@@ -15,7 +14,6 @@ const initialState = {
 }
 const burgerReducer = (state = initialState, action) => {
     switch (action.type) {
-
         case actionTypes.ADD_INGREDIENT:
             return {
                 ...state,
@@ -68,4 +66,5 @@ const burgerReducer = (state = initialState, action) => {
             return state;
     }
 };
+
 export default burgerReducer;

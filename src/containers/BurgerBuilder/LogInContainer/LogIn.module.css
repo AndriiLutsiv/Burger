@@ -9,6 +9,12 @@
     border-radius: 7px;
 }
 
+legend {
+    color: rgb(112, 34, 236);
+    font-size: 20px;
+    font-weight: 700;
+}
+
 .LogIn input {
     margin: 10px;
 }

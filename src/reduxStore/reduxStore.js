@@ -3,16 +3,18 @@ import {
     applyMiddleware,
     combineReducers
 } from 'redux';
+import burgerReducer from './burgerPage/burger-reducer';
+import authReducer from './authPage/authReducer';
+import thunkMiddleware from 'redux-thunk';
 import {
     reducer as formReducer
-} from 'redux-form'
-import thunkMiddleware from 'redux-thunk';
-import burgerReducer from './burgerPage/burger-reducer';
+} from 'redux-form';
 require("redux");
 
 let reducers = combineReducers({
     burgerReducer: burgerReducer,
-    form: formReducer
+    form: formReducer,
+    authReducer: authReducer,
 });
 
 let store = createStore(reducers, applyMiddleware(thunkMiddleware));

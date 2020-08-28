@@ -11,6 +11,11 @@
     z-index: 190;
 }
 
+.LogOut:hover {
+    color: red;
+    cursor: pointer;
+}
+
 @media (max-width: 499px) {
     .DesktopOnly {
         display: none;

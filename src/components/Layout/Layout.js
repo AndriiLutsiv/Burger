@@ -21,7 +21,7 @@ class Layout extends React.Component {
   render() {
     return (
       <>
-        <Toolbar emergedSidebar={this.emergedSidebar} />{" "}
+        <Toolbar emergedSidebar={this.emergedSidebar} />
         <div
           style={{
             display: this.state.showSidebar ? "block" : "none",
@@ -30,8 +30,8 @@ class Layout extends React.Component {
           <SideDrawer
             removeSidebar={this.removeSidebar}
             showSidebar={this.state.showSidebar}
-          />
-        </div>
+          />{" "}
+        </div>{" "}
         <main className={classes.Content}> {this.props.children} </main>{" "}
       </>
     );
