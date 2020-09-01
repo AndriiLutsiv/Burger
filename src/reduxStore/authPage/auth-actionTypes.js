@@ -2,9 +2,9 @@ export const LOADING_PROCESS = 'LOADING_PROCESS';
 
 export const RECIEVE_ID_AND_TOKEN = 'RECIEVE_ID_AND_TOKEN';
 
-export const REDIRECT_TO_LOGIN = 'REDIRECT_TO_LOGIN';
 
-export const BACK_TO_SIGNUP = 'BACK_TO_SIGNUP';
+
+
 
 export const LOG_OUT = 'LOG_OUT';
 

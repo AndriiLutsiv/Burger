@@ -1,3 +1,9 @@
+.toLogin {
+    font-weight: 700;
+    color: blue;
+    cursor: pointer;
+}
+
 .SignUp {
     margin-top: 10%;
     margin-left: auto;

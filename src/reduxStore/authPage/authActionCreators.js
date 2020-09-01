@@ -28,24 +28,10 @@ export const errorMessageAC = (errorMessage) => {
     }
 };
 
-//redirect to loginLink
-export const redirectToLogInLinkAC = (link) => {
-    return {
-        type: authActionTypes.REDIRECT_TO_LOGIN,
-        link: link,
-    }
-}
-
-export const backToSignUpPageAC = () => {
-    return {
-        type: authActionTypes.BACK_TO_SIGNUP
-    }
-
-}
 
 export const logOutAC = () => {
     return {
-        type: authActionTypes.LOG_OUT
+        type: authActionTypes.LOG_OUT,
     }
 }
 
@@ -69,7 +55,6 @@ export const signUpThunkCreator = (value) => {
                 // };
                 // dispatch(recieveIdandTokenAC(idTokenData));
                 dispatch(errorResponseStatusAC(false));
-                dispatch(redirectToLogInLinkAC('/login'));
             })
             .catch((error) => {
                 console.log(
@@ -97,12 +82,15 @@ export const logInThunkCreator = (value) => {
             .then((Response) => {
                 console.log("log in ok:", Response);
                 dispatch(loadingProcessAC(false));
-                const idTokenData = {
+                const dataObj = {
                     idToken: Response.data.idToken,
                     localId: Response.data.localId,
                 };
-                dispatch(recieveIdandTokenAC(idTokenData));
+                dispatch(recieveIdandTokenAC(dataObj));
+                localStorage.setItem('T', Response.data.idToken);
+                localStorage.setItem('L', Response.data.localId);
                 dispatch(errorResponseStatusAC(false));
+
             })
             .catch((error) => {
                 console.log(
@@ -113,5 +101,27 @@ export const logInThunkCreator = (value) => {
                 dispatch(errorResponseStatusAC(true));
                 dispatch(errorMessageAC(error.response.data.error.message));
             });
-    }
-}
+    };
+};
+
+//check if local storage has tokenId Thunk
+export const checkTokenThunkCreator = () => {
+    return (dispatch) => {
+        const token = localStorage.getItem('T');
+        const localId = localStorage.getItem('L');
+
+        const dataObj = { //we also get localId, as our AC expects an object with 2 parametars
+            idToken: token,
+            localId: localId,
+        };
+        if (token !== null && localId !== null) {
+            dispatch(recieveIdandTokenAC(dataObj));
+            // alert('was found data in LS')
+        } else {
+            dispatch(logOutAC());
+            // window.localStorage.clear();
+
+        };
+
+    };
+};

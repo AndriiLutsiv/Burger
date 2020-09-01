@@ -39,12 +39,14 @@ const LogIn = (props) => {
         </div>
         <button>Log in</button>
 
-        <div>
-          <NavLink onClick={props.backToSignUp} to={"/signup"}>
-            {/*  onclick you are redirected to sign up page */}
+        <p>
+          {/* <NavLink onClick={props.backToSignUp} to={"/signup"}> */}
+          {/*  onclick you are redirected to sign up page */}
+          <span className={classes.toSignUp} onClick={props.backToSignUp}>
             &#8592; back to sign up page
-          </NavLink>
-        </div>
+          </span>
+          {/* </NavLink> */}
+        </p>
       </form>
     </fieldset>
   );

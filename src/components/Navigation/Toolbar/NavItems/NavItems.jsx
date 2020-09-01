@@ -22,13 +22,15 @@ const NavItems = (props) => {
       >
         <NavItem link="/orders">Orders</NavItem>
       </div>
-      <div
-        style={
-          props.idToken !== null ? { display: "none" } : { display: "block" }
-        }
-      >
-        <NavItem link="/signup">SignUp/LogIn </NavItem>
-      </div>
+      {props.idToken === null ? (
+        <div>
+          <NavItem link="/signup">SignUp/LogIn </NavItem>
+        </div>
+      ) : (
+        <div>
+          <NavItem link={"/logout"}>LogOut</NavItem>{" "}
+        </div>
+      )}
     </div>
   );
 };

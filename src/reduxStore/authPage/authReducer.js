@@ -6,7 +6,7 @@ const initialState = {
     localId: null,
     errorResponseStatus: false,
     errorMessage: "",
-    redirectToLogInLink: null,
+
 }
 const authReducer = (state = initialState, action) => {
 
@@ -33,23 +33,16 @@ const authReducer = (state = initialState, action) => {
                 ...state,
                 errorMessage: action.errorMessage,
             };
-        case authActionTypes.REDIRECT_TO_LOGIN: //this will initiate AC which puts some link in out state (redirectToLogInLink)
+
+        case authActionTypes.LOG_OUT: //if logOut we head back to logIn page
             return {
                 ...state,
-                redirectToLogInLink: action.link
-            }
-            case authActionTypes.BACK_TO_SIGNUP: //if this link in login is pressed, it`ll bring you back to login page
-                return {
-                    ...state,
-                    redirectToLogInLink: null
-                }
-                case authActionTypes.LOG_OUT: //if logOut we head back to logIn page
-                    return {
-                        idToken: null,
-                            localId: null
-                    }
-                    default:
-                        return state;
+                idToken: null,
+                    localId: null,
+
+            };
+        default:
+            return state;
     }
 };
 

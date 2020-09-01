@@ -5,7 +5,7 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.logInThunkCreator = exports.signUpThunkCreator = exports.logOutAC = exports.backToSignUpPageAC = exports.redirectToLogInLinkAC = exports.errorMessageAC = exports.errorResponseStatusAC = exports.recieveIdandTokenAC = exports.loadingProcessAC = void 0;
+exports.checkTokenThunkCreator = exports.logInThunkCreator = exports.signUpThunkCreator = exports.logOutAC = exports.errorMessageAC = exports.errorResponseStatusAC = exports.recieveIdandTokenAC = exports.loadingProcessAC = void 0;
 
 var authActionTypes = _interopRequireWildcard(require("./auth-actionTypes"));
 
@@ -51,27 +51,9 @@ var errorMessageAC = function errorMessageAC(errorMessage) {
     type: authActionTypes.ERROR_MESSAGE,
     errorMessage: errorMessage
   };
-}; //redirect to loginLink
-
+};
 
 exports.errorMessageAC = errorMessageAC;
-
-var redirectToLogInLinkAC = function redirectToLogInLinkAC(link) {
-  return {
-    type: authActionTypes.REDIRECT_TO_LOGIN,
-    link: link
-  };
-};
-
-exports.redirectToLogInLinkAC = redirectToLogInLinkAC;
-
-var backToSignUpPageAC = function backToSignUpPageAC() {
-  return {
-    type: authActionTypes.BACK_TO_SIGNUP
-  };
-};
-
-exports.backToSignUpPageAC = backToSignUpPageAC;
 
 var logOutAC = function logOutAC() {
   return {
@@ -99,7 +81,6 @@ var signUpThunkCreator = function signUpThunkCreator(value) {
       // dispatch(recieveIdandTokenAC(idTokenData));
 
       dispatch(errorResponseStatusAC(false));
-      dispatch(redirectToLogInLinkAC('/login'));
     })["catch"](function (error) {
       console.log("error catch sign up response: ", error.response.data.error.message);
       dispatch(loadingProcessAC(false));
@@ -123,11 +104,13 @@ var logInThunkCreator = function logInThunkCreator(value) {
     }).then(function (Response) {
       console.log("log in ok:", Response);
       dispatch(loadingProcessAC(false));
-      var idTokenData = {
+      var dataObj = {
         idToken: Response.data.idToken,
         localId: Response.data.localId
       };
-      dispatch(recieveIdandTokenAC(idTokenData));
+      dispatch(recieveIdandTokenAC(dataObj));
+      localStorage.setItem('T', Response.data.idToken);
+      localStorage.setItem('L', Response.data.localId);
       dispatch(errorResponseStatusAC(false));
     })["catch"](function (error) {
       console.log("error catch log in response: ", error.response.data.error.message);
@@ -136,6 +119,29 @@ var logInThunkCreator = function logInThunkCreator(value) {
       dispatch(errorMessageAC(error.response.data.error.message));
     });
   };
-};
+}; //check if local storage has tokenId Thunk
+
 
 exports.logInThunkCreator = logInThunkCreator;
+
+var checkTokenThunkCreator = function checkTokenThunkCreator() {
+  return function (dispatch) {
+    var token = localStorage.getItem('T');
+    var localId = localStorage.getItem('L');
+    var dataObj = {
+      //we also get localId, as our AC expects an object with 2 parametars
+      idToken: token,
+      localId: localId
+    };
+
+    if (token !== null && localId !== null) {
+      dispatch(recieveIdandTokenAC(dataObj)); // alert('was found data in LS')
+    } else {
+      dispatch(logOutAC()); // window.localStorage.clear();
+    }
+
+    ;
+  };
+};
+
+exports.checkTokenThunkCreator = checkTokenThunkCreator;

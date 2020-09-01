@@ -24,8 +24,7 @@ var initialState = {
   idToken: null,
   localId: null,
   errorResponseStatus: false,
-  errorMessage: "",
-  redirectToLogInLink: null
+  errorMessage: ""
 };
 
 var authReducer = function authReducer() {
@@ -58,24 +57,12 @@ var authReducer = function authReducer() {
         errorMessage: action.errorMessage
       });
 
-    case authActionTypes.REDIRECT_TO_LOGIN:
-      //this will initiate AC which puts some link in out state (redirectToLogInLink)
-      return _objectSpread({}, state, {
-        redirectToLogInLink: action.link
-      });
-
-    case authActionTypes.BACK_TO_SIGNUP:
-      //if this link in login is pressed, it`ll bring you back to login page
-      return _objectSpread({}, state, {
-        redirectToLogInLink: null
-      });
-
     case authActionTypes.LOG_OUT:
       //if logOut we head back to logIn page
-      return {
+      return _objectSpread({}, state, {
         idToken: null,
         localId: null
-      };
+      });
 
     default:
       return state;

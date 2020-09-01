@@ -38,13 +38,13 @@ const SignUp = (props) => {
           />
         </div>
         <button>SignUp</button>
-        <div>
+        <p>
           If you already have an account, please follow
-          <strong>
-            <NavLink to={"/login"}> this link</NavLink>
-          </strong>{" "}
+          <span onClick={props.bringToLogin} className={classes.toLogin}>
+            &nbsp; this link &nbsp;
+          </span>
           to log in
-        </div>
+        </p>
       </form>
     </fieldset>
   );

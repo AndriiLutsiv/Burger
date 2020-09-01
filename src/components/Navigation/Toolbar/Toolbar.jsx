@@ -5,34 +5,24 @@ import LogoDesktop from "./Logo/LogoDesktop";
 import PhoneMenu from "./SmartPhoneMenu/PhoneMenu";
 import { connect } from "react-redux";
 import * as authAC from "../../../reduxStore/authPage/authActionCreators";
-import { Redirect } from "react-router-dom";
 
-const Toolbar = (props) => {
-  const logOut = () => {
-    props.logOutAC();
-  };
-  return (
-    <div>
-      <div className={classes.Tolbar}>
-        <PhoneMenu emergedSidebar={props.emergedSidebar} />
-        <div
-          onClick={logOut}
-          className={classes.LogOut}
-          style={
-            props.idToken === null ? { display: "none" } : { display: "block" }
-          }
-        >
-          LogOut
-        </div>
-        <LogoDesktop />
-        <div className={classes.DesktopOnly}>
-          <NavItems />
+import { PureComponent } from "react";
+
+class Toolbar extends PureComponent {
+  render() {
+    return (
+      <div>
+        <div className={classes.Tolbar}>
+          <PhoneMenu emergedSidebar={this.props.emergedSidebar} />
+          <LogoDesktop />
+          <div className={classes.DesktopOnly}>
+            <NavItems />
+          </div>
         </div>
       </div>
-      {props.idToken === null ? <Redirect to={"/signup"} /> : null}
-    </div>
-  );
-};
+    );
+  }
+}
 const mapStateToProps = (state) => {
   return { idToken: state.authReducer.idToken };
 };
