@@ -19,24 +19,22 @@ const SignUp = (props) => {
         <p style={{ color: "red" }}>{props.errorMessage}</p>
       ) : null}
       <form onSubmit={props.handleSubmit}>
-        <div>
-          <Field
-            component={Input}
-            name={"mail"}
-            type={"text"}
-            label={"Email"}
-            validate={[requiredField, maxLength, minLength]}
-          />
-        </div>
-        <div>
-          <Field
-            component={Input}
-            name={"pass"}
-            type={"password"}
-            label={"Password"}
-            validate={[requiredField]}
-          />
-        </div>
+        <Field
+          component={Input}
+          name={"mail"}
+          type={"text"}
+          label={"Email"}
+          validate={[requiredField, maxLength, minLength]}
+        />
+
+        <Field
+          component={Input}
+          name={"pass"}
+          type={"password"}
+          label={"Password"}
+          validate={[requiredField]}
+        />
+
         <button>SignUp</button>
         <p>
           If you already have an account, please follow

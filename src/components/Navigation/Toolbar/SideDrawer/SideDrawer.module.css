@@ -1,23 +1,81 @@
 .SideDrawer {
     position: fixed;
-    width: 300px;
+    width: 320px;
     max-width: 90%;
     height: 100%;
     left: 0;
     top: 0;
     z-index: 200;
-    background-color: rgb(163, 156, 156);
+    background-color: rgb(200, 162, 250);
     padding: 35px 16px;
     box-sizing: border-box;
-    transition: transform 1s ease-out;
+    transition: transform 0.7s ease-out;
 }
 
 .Open {
-    transform: translateX(0);
+    transform: translateX(0px);
+    animation: openAnimation 0.7s;
 }
 
 .Close {
     transform: translateX(-100%);
+    animation: closeAnimation 0.7s;
+}
+
+@keyframes openAnimation {
+    0% {
+        background-color: rgb(250, 239, 250);
+    }
+
+    20% {
+        background-color: rgb(240, 235, 250);
+
+    }
+
+    40% {
+        background-color: rgb(230, 214, 250);
+    }
+
+    60% {
+        background-color: rgb(220, 204, 250);
+    }
+
+    80% {
+        background-color: rgb(210, 162, 250);
+    }
+
+    100% {
+        background-color: rgb(200, 162, 250);
+    }
+}
+
+@keyframes closeAnimation {
+    0% {
+        background-color: rgb(200, 162, 250);
+        width: 320px;
+    }
+
+    20% {
+        background-color: rgb(210, 162, 250);
+        width: 350px;
+    }
+
+    40% {
+        background-color: rgb(220, 204, 250);
+    }
+
+    60% {
+        background-color: rgb(230, 214, 250);
+    }
+
+    80% {
+        background-color: rgb(240, 235, 250);
+    }
+
+    100% {
+        background-color: rgb(250, 239, 250);
+        width: 320px;
+    }
 }
 
 .back {
@@ -30,7 +88,6 @@
 .hideSidebar {
     background-color: transparent;
     border: 1px solid grey;
-
     margin-top: 20px;
     border-radius: 10px;
     color: rgb(100, 98, 98);

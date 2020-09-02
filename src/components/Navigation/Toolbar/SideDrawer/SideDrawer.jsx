@@ -6,6 +6,8 @@ const SideDrawer = (props) => {
   let addClasses = [classes.SideDrawer];
   if (props.showSidebar) {
     addClasses = [classes.SideDrawer, classes.Open];
+  } else {
+    addClasses = [classes.SideDrawer, classes.Close];
   }
 
   return (

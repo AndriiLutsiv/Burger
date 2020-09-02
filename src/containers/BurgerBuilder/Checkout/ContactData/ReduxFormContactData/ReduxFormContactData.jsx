@@ -13,38 +13,34 @@ const FormcontactData = (props) => {
   return (
     <div className={classes.formMain}>
       <form onSubmit={props.handleSubmit}>
-        <div>
-          <Field
-            validate={[requiredField, maxLength, minLength]}
-            label={"Enter your name"}
-            name={"name"}
-            component={Input}
-          />
-        </div>
-        <div>
-          <Field
-            validate={[requiredField, maxLength, minLength]}
-            label={"Enter your email"}
-            name={"email"}
-            component={Input}
-          />
-        </div>
-        <div>
-          <Field
-            validate={[requiredField, maxLength, minLength]}
-            label={"Specify your country"}
-            name={"country"}
-            component={Input}
-          />
-        </div>
-        <div>
-          <Field
-            validate={[requiredField, maxLength, minLength]}
-            label={"Specify your city"}
-            name={"city"}
-            component={Input}
-          />
-        </div>
+        <Field
+          validate={[requiredField, maxLength, minLength]}
+          label={"Enter your name"}
+          name={"name"}
+          component={Input}
+        />
+
+        <Field
+          validate={[requiredField, maxLength, minLength]}
+          label={"Enter your email"}
+          name={"email"}
+          component={Input}
+        />
+
+        <Field
+          validate={[requiredField, maxLength, minLength]}
+          label={"Specify your country"}
+          name={"country"}
+          component={Input}
+        />
+
+        <Field
+          validate={[requiredField, maxLength, minLength]}
+          label={"Specify your city"}
+          name={"city"}
+          component={Input}
+        />
+
         <button>ORDER</button>
       </form>
     </div>

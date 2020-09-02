@@ -1,8 +1,11 @@
 .normal {
     border: 2px solid grey;
-    width: 250px;
+    width: 200px;
     height: 20px;
     border-radius: 5px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+
 }
 
 .error {

@@ -5,6 +5,7 @@ import Modal from "../../components/UI/Modal/Modal";
 import Loader from "../../components/common/Loader";
 import { connect } from "react-redux";
 import * as actionCreators from "../../reduxStore/burgerPage/burger-actionCreators";
+import { Redirect } from "react-router-dom";
 
 class BurgerBuilder extends Component {
   componentDidMount() {
@@ -44,30 +45,33 @@ class BurgerBuilder extends Component {
   render() {
     return (
       <>
-        {this.props.loading ? (
-          <Loader />
-        ) : (
-          <div>
-            <Burger ingredients={this.props.ingredients} />
-            {this.props.loading ? (
-              <Loader />
-            ) : (
-              <Modal
-                ingredients={this.props.ingredients}
-                continueOrder={this.continueOrder}
+        {this.props.idToken === null ? <Redirect to={"/signup"} /> : null}
+        <div>
+          {this.props.loading ? (
+            <Loader />
+          ) : (
+            <div>
+              <Burger ingredients={this.props.ingredients} />
+              {this.props.loading ? (
+                <Loader />
+              ) : (
+                <Modal
+                  ingredients={this.props.ingredients}
+                  continueOrder={this.continueOrder}
+                  totalPrice={this.props.totalPrice}
+                />
+              )}
+              <BuildControls
+                addIngredient={this.addIngredient}
+                removeIngredient={this.removeIngredient}
+                ingredientsIfZero={this.props.ingredients} //passing the ingredients for ternar
+                ingredientsIfThree={this.props.ingredients} // passing the ingredients for ternar
                 totalPrice={this.props.totalPrice}
+                purchasable={this.makingPurchasable(this.props.ingredients)}
               />
-            )}
-            <BuildControls
-              addIngredient={this.addIngredient}
-              removeIngredient={this.removeIngredient}
-              ingredientsIfZero={this.props.ingredients} //passing the ingredients for ternar
-              ingredientsIfThree={this.props.ingredients} // passing the ingredients for ternar
-              totalPrice={this.props.totalPrice}
-              purchasable={this.makingPurchasable(this.props.ingredients)}
-            />
-          </div>
-        )}
+            </div>
+          )}
+        </div>
       </>
     );
   }
@@ -77,6 +81,7 @@ const mapStateToProps = (state) => {
     ingredients: state.burgerReducer.ingredients,
     totalPrice: state.burgerReducer.totalPrice,
     loading: state.burgerReducer.loading,
+    idToken: state.authReducer.idToken,
   };
 };
 const mapDispatchToProps = (dispatch) => {

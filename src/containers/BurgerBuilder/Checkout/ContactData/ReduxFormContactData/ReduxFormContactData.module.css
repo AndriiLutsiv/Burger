@@ -1,21 +1,23 @@
 .formMain {
-    width: 70%;
+
+    width: 85%;
+    height: 190px;
+    min-width: 250px;
     border: 1px solid grey;
     box-shadow: 2px 2px rgb(155, 154, 154);
-    padding: 5px 30px;
+    /* padding: 20px 30px; */
     margin: 10px auto;
     background-image: linear-gradient(to top, rgb(248, 247, 247), rgb(197, 194, 194));
     border-radius: 5px;
-}
-
-.formMain div,
-.formMain button {
-    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .formMain button {
     border: 2px solid grey;
     border-radius: 5px;
+    margin-bottom: 10px;
 }
 
 .formMain button:hover {
